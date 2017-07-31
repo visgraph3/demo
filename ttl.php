@@ -1,6 +1,6 @@
 <?php
 	$model = urlencode($_GET['model']);
-	$u = 'http://codedev.pl/visgraph3/rdfapi-php/tools/rdfdb-utils/rdf.php?model='.$model;
+	$u = 'http://visgraph3.org/rdfapi-php/tools/rdfdb-utils/rdf.php?model='.$model;
 	include_once('namespaces.php');
 	include_once('arc2/ARC2.php');
 

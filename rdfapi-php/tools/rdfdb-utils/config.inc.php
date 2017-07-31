@@ -7,10 +7,10 @@
 // ----------------------------------------------------------------------------------
 
 #
-# Edit this to suit your setup! 
+# Edit this to suit your setup!
 #
 
-/** 
+/**
  * Configuration file
  * @version $Id: config.inc.php 268 2006-05-15 05:28:09Z tgauss $
  * @author   Gunnar AAstrand Grimnes <ggrimnes@csd.abdn.ac.uk>
@@ -27,21 +27,21 @@
 
 $_DB=array();
 
-$i=0; 
+$i=0;
 $_DB[$i]["type"]="mysql";
 $_DB[$i]["host"]="localhost";
-$_DB[$i]["port"]="3306"; 
-$_DB[$i]["dbName"]="pl041_rdf"; 
+$_DB[$i]["port"]="3306";
+$_DB[$i]["dbName"]="pl041_rdf";
 $_DB[$i]["username"]="pl041_rdf";
 $_DB[$i]["password"]="bazaRDF33";
 
 //$i++
 
-// $i=0; 
+// $i=0;
 // $_DB[$i]["type"]="mysql";
 // $_DB[$i]["host"]="localhost";
-// $_DB[$i]["port"]=""; 
-// $_DB[$i]["dbName"]="rdf"; 
+// $_DB[$i]["port"]="";
+// $_DB[$i]["dbName"]="rdf";
 // $_DB[$i]["username"]="root";
 // $_DB[$i]["password"]="";
 
@@ -57,7 +57,7 @@ $_DB[$i]["password"]="bazaRDF33";
 
 session_start();
 
-define("RDFAPI_INCLUDE_DIR", "/home/pl041/domains/codedev.pl/public_html/rdf/aplikacja/rdfapi-php/api/");
+define("RDFAPI_INCLUDE_DIR", "/home/pl041/domains/visgraph3.org/public_html/rdf/aplikacja/rdfapi-php/api/");
 
 include(RDFAPI_INCLUDE_DIR . "RdfAPI.php");
 include(RDFAPI_INCLUDE_DIR . PACKAGE_SYNTAX_RDF);

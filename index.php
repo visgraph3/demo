@@ -26,7 +26,7 @@ function random_num($size) {
 }
 
 
-if ( isset($_FILES["rdffile"]) || $_POST["adres_url"] ) { 
+if ( isset($_FILES["rdffile"]) || $_POST["adres_url"] ) {
 	$r=new RdfParser();
 	$n3p=new N3Parser();
 	if( isset($_FILES["rdffile"]) && $_FILES["rdffile"]['name'] != '' ) {
@@ -34,7 +34,7 @@ if ( isset($_FILES["rdffile"]) || $_POST["adres_url"] ) {
 			$m2=$n3p->generateModel($_FILES["rdffile"]["tmp_name"]);
 		} else {
     		$m2=$r->generateModel($_FILES["rdffile"]["tmp_name"]);
-    	};    	
+    	};
     } else if( $_POST["adres_url"] ) {
     	file_put_contents("tmp.rdf", fopen("http://rdf-translator.appspot.com/convert/detect/pretty-xml/".$_POST['adres_url'], 'r'));
 
@@ -127,10 +127,10 @@ if ( isset($_REQUEST["tripleadd"])) {
 	}
 
 
-	if (isset($_REQUEST["subject_bnode"])) { 
+	if (isset($_REQUEST["subject_bnode"])) {
 		$nowy_temat = str_replace('_:', '', $nowy_temat);
 		$s=$nowy_temat!=""?new BlankNode($nowy_temat):null;
-    } else { 
+    } else {
 		$s=$nowy_temat!=""?new Resource($nowy_temat):null;
     }
 
@@ -142,19 +142,19 @@ if ( isset($_REQUEST["tripleadd"])) {
     } else if (isset($_REQUEST["object_bnode"])) {
   		$nowy_objekt = str_replace('_:', '', $nowy_objekt);
 		$o=$nowy_objekt!=""?new BlankNode($nowy_objekt):null;
-	} else { 
+	} else {
 		$o=$nowy_objekt!=""?new Resource($nowy_objekt):null;
 	}
 
-    if ($s==null || $o==null || $p==null) { 
+    if ($s==null || $o==null || $p==null) {
       print "<div class='container'><div class='alert alert-danger' role='alert'>You must fill all the fields!</div></div>\n";
-    } else { 
+    } else {
       $m->add(new Statement($s,$p,$o));
       print "<div class='container'><div class='alert alert-success' role='alert'>New node was added.</div></div>\n";
     }
 }
 
-if ( isset($_REQUEST["zapisz_graf"])) { 
+if ( isset($_REQUEST["zapisz_graf"])) {
 	$model = $_SESSION['model'];
 
 	unset($_SESSION['model']);
@@ -167,7 +167,7 @@ if( $_SESSION['model'] ) {
 } else {
 	$model = urlencode($_GET['model']);
 }
-$url = 'http://codedev.pl/visgraph3/rdfapi-php/tools/rdfdb-utils/rdf.php?model='.$model;
+$url = 'http://visgraph3.org/rdfapi-php/tools/rdfdb-utils/rdf.php?model='.$model;
 
 if ( !isset($_FILES['rdffile']) && !isset($_POST['adres_url']) && !isset($_REQUEST['tripleadd']) && !isset($_REQUEST['namespaceeadd']) ) {
 	$model = $_SESSION['model'];
@@ -189,22 +189,22 @@ if ( isset($_REQUEST["namespaceeadd"])) {
 
 	$m=$db->getModel($model);
 
-	if (isset($_REQUEST["namespace"])){ 
+	if (isset($_REQUEST["namespace"])){
 		$nmsp=$_REQUEST["namespace"];
 	}else{
 		$nmsp = null;
 	}
 
-	if (isset($_REQUEST["namespaceprefix"])){	
+	if (isset($_REQUEST["namespaceprefix"])){
 		$prefix=$_REQUEST["namespaceprefix"];
 	}else{
 		$prefix = null;
 	}
 
-	if ($nmsp==null || $prefix==null) { 
+	if ($nmsp==null || $prefix==null) {
 		print "<div class='container'><div class='alert alert-danger' role='alert'>You need to enter a prefix and IRI!</div></div>\n";
-	} else { 
-	  	$m->addNamespace($prefix,$nmsp); 
+	} else {
+	  	$m->addNamespace($prefix,$nmsp);
 	  	print "<div class='container'><div class='alert alert-success' role='alert'>New prefix was added.</div></div>\n";
 	}
 }
@@ -248,14 +248,14 @@ if ( isset($_REQUEST["namespaceeadd"])) {
           <input type="text" class="form-control" id="adres_url" name="adres_url" placeholder="website address">
         </div>
       </div>
-      
+
       <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 
       <h5 class="form-signin-heading" style="margin-top:10px">Recent added</h5>
       	<ul>
-		<?php 
+		<?php
 			$modele = array_slice( array_reverse($db->listModels()) , 0, 5);
-			foreach( $modele as $mo) { 
+			foreach( $modele as $mo) {
 				$m=$mo["modelURI"];
 		?>
   			<li><a href="?model=<?php print urlencode($m)?>"><?php print $m?></a></li>
@@ -282,7 +282,7 @@ if ( isset($_REQUEST["namespaceeadd"])) {
 						<label for="namespace">IRI</label>
 						<input type="text" class="form-control" id="namespace" name="namespace">
 					</div>
-					
+
 					<button type="submit" class="btn btn-primary">Submit</button>
 					<input type="hidden" name="namespaceeadd" value="true" />
 					<input type="hidden" name="model" value="<?php if( $_SESSION['model'] ) echo $_SESSION['model']; else echo $_GET['model'] ;?>">
@@ -295,8 +295,8 @@ if ( isset($_REQUEST["namespaceeadd"])) {
   </button>
   <div class="dropdown-menu">
     <!-- <a class="dropdown-item" href="http://codedev.pl/visgraph3/ttl.php?model=<?php if( $_SESSION['model'] ) echo $_SESSION['model']; else echo $_GET['model'] ;?>">.ttl</a> -->
-    <a class="dropdown-item" href="http://codedev.pl/visgraph3/rdfapi-php/tools/rdfdb-utils/download_n3.php?model=<?php if( $_SESSION['model'] ) echo $_SESSION['model']; else echo $_GET['model'] ;?>">Turtle</a>
-    <a target="_blank" class="dropdown-item" href="http://codedev.pl/visgraph3/rdfapi-php/tools/rdfdb-utils/rdf.php?model=<?php if( $_SESSION['model'] ) echo $_SESSION['model']; else echo $_GET['model'] ;?>">RDF/XML</a>
+    <a class="dropdown-item" href="http://visgraph3.org/rdfapi-php/tools/rdfdb-utils/download_n3.php?model=<?php if( $_SESSION['model'] ) echo $_SESSION['model']; else echo $_GET['model'] ;?>">Turtle</a>
+    <a target="_blank" class="dropdown-item" href="http://visgraph3.org/rdfapi-php/tools/rdfdb-utils/rdf.php?model=<?php if( $_SESSION['model'] ) echo $_SESSION['model']; else echo $_GET['model'] ;?>">RDF/XML</a>
   </div>
 </div> <input type="hidden" name="zapisz_graf" value="true"></form></h3>
 				<form method="get" action="." class="form-inline">
@@ -307,14 +307,14 @@ if ( isset($_REQUEST["namespaceeadd"])) {
 						</label>
 					</div>
 					<div class="form-check checkbox checkbox-primary">
-						
+
 							<input type="checkbox" class="form-check-input" id="hidePredicates">
-							
+
 						<label class="form-check-label" for="hidePredicates">
 							Hide predicates
 							</label>
 							<div id="preds" style="border: 1px solid black; position:absolute; display:none; color: white; background: rgba(0, 0, 0, 0.6);padding:15px;top:25px;left:0"></div>
-						
+
 					</div>
 				</form>
 				<div id='chart'></div>
@@ -339,7 +339,7 @@ if ( isset($_REQUEST["namespaceeadd"])) {
 					<input type="checkbox" name="subject_bnode"> bNode
 				</label>
 			</div>
-			
+
 		</div>
 
 		<div class="form-group">
@@ -361,7 +361,7 @@ if ( isset($_REQUEST["namespaceeadd"])) {
 				</label>
 			</div>
 		</div>
-		
+
 
 		<button type="submit" class="btn btn-primary">Add</button>
 
@@ -396,7 +396,7 @@ if ( isset($_REQUEST["namespaceeadd"])) {
 	    ],
 	    twitter_counter: true,
 	    text: "share with: ",
-	    url: window.location.href 
+	    url: window.location.href
 	  });
 
 	  $(document).ready(function() {
